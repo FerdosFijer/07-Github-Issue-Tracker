@@ -1,11 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title> GitHub Issues Tracker | Login</title>
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+
+    <!-- tailwind + Daisy -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        * {
+            font-family: "Geist", sans-serif;
+        }
+    </style>
+
 </head>
-<body>
-    
+
+<body class="min-h-screen max-w-lg bg-base-200 mx-auto ">
+    <div class="logo text-center mx-auto pt-36">
+        <img class="mx-auto" src="./assets//github-logo.png" alt="" srcset="">
+        <h2 class="font-bold text-2xl">GitHub Issues Tracker</h2>
+        <p class="text-slate-500">Sign in to manage your issues</p>
+    </div>
+
+    <div class="form pt-10">
+            <div class="card-body w-11/12 mx-auto space-y-3">
+                <fieldset class="fieldset">
+                    <label class="label text-neutral font-bold">Username</label>
+                    <input id="input-name" type="text" class="input rounded-sm w-full "
+                        placeholder="Enter Username" maxlength="11" minlength="11" />
+                    <p class="text-xs text-primary">Default: admin</p>
+
+                    <label class="label text-neutral font-bold">Password</label>
+                    <input id="input-pin" type="password" class="input rounded-sm w-full "
+                        placeholder="Enter Password" maxlength="11" minlength="11" />
+                    <p class="text-xs text-primary">Default: admin123</p>
+
+                    <button id="SignIn-btn" class="btn btn-primary w-full rounded-sm mt-4">Sign In</button>
+                </fieldset>
+            </div>
+    </div>
+
+    <div class="card-body w-11/12 mx-auto">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="flex-1 border-t border-gray-400 "></div>
+            <span class=" font-medium">OR</span>
+            <div class="flex-1 border-t border-gray-400"></div>
+        </div>
+        <div class="  bg-gray-200 p-8 text-center rounded-md">
+            <p class="text-gray-500 mb-6">Demo Credentials:</p>
+            <div class="space-y-2 text-lg">
+                <p><span class="font-bold">Username:</span> admin</p>
+                <p><span class="font-bold">Password:</span> admin123</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script/login.js"></script>
+
 </body>
+
 </html>
