@@ -19,7 +19,7 @@ const displayIssues = (Issues) => {
     statusContainer.innerHTML = "";
 
     Issues.forEach(Issue => {
-        console.log( "Fijer have a", Issue)
+        // console.log( "Fijer have a", Issue)
         const btnDiv = document.createElement("div");
         btnDiv.innerHTML = `<div
         <span>${Issue.status === "open" ? `<div class="card bg-base-100 w-86 shadow-md border-t-4 border-green-500 ></div>` : `<div class="card bg-base-100 w-86 shadow-md border-t-4 border-blue-500 ></div>`} </span>  
@@ -119,3 +119,19 @@ const displayIssueDetails = (issue) => {
     document.getElementById("issue_modal").showModal();
 }
 loadIssues();
+
+document.getElementById("btn-search").addEventListener("click", () => {
+    const input = document.getElementById("input-search");
+    const searchValue = input.value.trim().toLowerCase();
+    // console.log(searchValue);
+
+    fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+        .then(res => res.json())
+        .then(data => {
+            // console.log("Like my own", data)
+            const allIssue = data.data;
+            console.log(allIssue);
+            const filterIssue = allIssue.filter((description) => description.description.toLowerCase().includes(searchValue));
+            displayIssues(filterIssue);
+        });
+});
