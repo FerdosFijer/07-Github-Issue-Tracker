@@ -1,3 +1,7 @@
+function setNumIssue(value) {
+    const balanceElement = document.getElementById("numIssue");
+    balanceElement.innerText = value;
+}
 let allIssues = [];
 const loadIssues = () => {
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
@@ -47,12 +51,30 @@ const displayIssues = (Issues) => {
 const filterIssues = (status) => {
     if (status === "all") {
         displayIssues(allIssues);
+        setNumIssue(`${allIssues.length} Issues`)
     } else {
         const filtered = allIssues.filter(
             issue => issue.status.toLowerCase() === status
         );
         displayIssues(filtered);
+        setNumIssue(`${filtered.length} Issues`)
     }
+};
+const removeActive = () => {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+
+    filterButtons.forEach(btn => {
+        btn.classList.remove("btn-primary");
+    });
+};
+
+const setActive = (status) => {
+    removeActive();
+
+    const clickBtn = document.getElementById(`filter-btn-${status}`);
+    clickBtn.classList.add("btn-primary");
+
+    filterIssues(status);
 };
 
 const issueDetails = async (id) => {
