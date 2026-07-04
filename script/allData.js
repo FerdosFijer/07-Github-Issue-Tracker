@@ -1,28 +1,34 @@
+let allIssues = [];
 const loadIssues = () => {
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then(res => res.json())
         // .then (json => console.log(json.data))
-        .then(json => displalyIssues(json.data));
+        .then(json => {
+            allIssues = json.data;
+            displayIssues(allIssues)
+            });
 };
 
-const displalyIssues = (Issues) => {
+const displayIssues = (Issues) => {
     const statusContainer = document.getElementById("status-container");
     // console.log(statusContainer);
     statusContainer.innerHTML = "";
 
     Issues.forEach(Issue => {
+        console.log( "Fijer have a", Issue)
         const btnDiv = document.createElement("div");
-        btnDiv.innerHTML = `<div class="card bg-base-100 w-86 shadow-md border-t-4 border-green-500  ">
+        btnDiv.innerHTML = `<div
+        <span>${Issue.status === "open" ? `<div class="card bg-base-100 w-86 shadow-md border-t-4 border-green-500 ></div>` : `<div class="card bg-base-100 w-86 shadow-md border-t-4 border-blue-500 ></div>`} </span>  
         <figure class=" shadow-sm">
             <div onclick="issueDetails(${Issue.id})" class="card-body">
 
                 <div class="flex justify-between">
-                    <img src="./assets/Open-Status.png" alt="">
-                    <span class="badge badge-warning ">Most Popular</span>
+                    <span>${Issue.status === "open" ? `<img src="./assets/Open-Status.png" alt="">` : `<img src="./assets/Closed- Status .png" alt="">`} </span>
+                    <span>  ${Issue.priority === "high"? `<span class="badge badge-soft badge-secondary ">HIGH</span>`: Issue.priority === "medium"? `<span class="badge badge-soft badge-warning">MEDIUM</span>`: `<span class="badge badge-soft badge-success">LOW</span>`}</span>
                 </div>
 
-                <h2 class="card-title"> ${Issue.id}. Fix navigation menu on mobile devices </h2>
-                <p>The navigation menu doesn't collapse properly on mobile devices...</p>
+                <h2 class="card-title"> ${Issue.title} </h2>
+                <p>${Issue.description}</p>
 
                 <div class="card-actions justify-start">
                     <div  class="badge badge-outline badge-secondary">Fashion</div>
@@ -31,12 +37,24 @@ const displalyIssues = (Issues) => {
             </div>
         </figure>
         <div class="card-body">
-            <p>#1 by john_doe</p>
-            <p>1/15/2024</p>
+            <p>#${Issue.id}  by ${Issue.author}</p>
+            <p>${Issue.createdAt.split("T")[0]}</p>
     </div> `;
         statusContainer.appendChild(btnDiv);
     })
 }
+
+const filterIssues = (status) => {
+    if (status === "all") {
+        displayIssues(allIssues);
+    } else {
+        const filtered = allIssues.filter(
+            issue => issue.status.toLowerCase() === status
+        );
+        displayIssues(filtered);
+    }
+};
+
 const issueDetails = async (id) => {
     const url= `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
     // console.log(url);
@@ -44,12 +62,6 @@ const issueDetails = async (id) => {
     const json3 = await res.json();
     displayIssueDetails(json3.data);
 };
-
-// const createElements = (arrs) => {
-//     const htmlElements = arrs.map((el) => `<span class= "btn"> ${el}</span>`);
-//     // console.log(htmlElements.join(" "));
-//     return htmlElements.join(" ");
-// }
 
 const displayIssueDetails = (issue) => {
     console.log(issue); 
@@ -64,7 +76,7 @@ const displayIssueDetails = (issue) => {
                         <p class="w-1 h-1 rounded-full border-3 border-gray-500"></p>
                         <span>Opened by ${issue.author} </span>
                         <p class="w-1 h-1 rounded-full border-3 border-gray-500"></p>
-                        <span>${issue.createdAt}</span>
+                        <span>${issue.createdAt.split("T")[0]}</span>
                     </div>
                    </div>
                     <div class="card-actions justify-start ">

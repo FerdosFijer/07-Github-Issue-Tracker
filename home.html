@@ -68,9 +68,9 @@
     <section class="bg-slate-50 pt-2">
 
         <div class="w-[80%] bg-white shadow-md rounded-sm mx-auto py-6 mb-6 flex justify-center items-center gap-4">
-            <button id="all-button" type="button" class="btn ">All</button>
-            <button type="button" class="btn">Open</button>
-            <button type="button" class="btn">Close</button>
+            <button onclick="filterIssues('all')" class="btn">All</button>
+            <button onclick="filterIssues('open')" class="btn">Open</button>
+            <button onclick="filterIssues('closed')" class="btn">Close</button>
         </div>
 
         <!-- //! No need to touch this one -->
@@ -95,6 +95,7 @@
         </div>
 
         <!-- //! card  -->
+
         <div id="status-container"
             class="bg-slate-50 w-[80%]  mx-auto grid grid-rows-1 justify-center md:grid-cols-4 gap-6  justify-items-center ">
         </div>
@@ -114,7 +115,11 @@
             </div>
         </dialog>
 
-        
+
+
+
+
+
 
 
     </section>
